@@ -1,0 +1,103 @@
+{{template "head.html"}}
+<div class="layui-row" style="box-shadow: 0px 0px 5px #000000;">
+    <div class="layui-col-xs12">
+        <div class="layui-col-xs3">
+            <a href="/web/home?name={{.user.Name}}&identity={{.user.Identity}}">
+                <i class="layui-icon layui-icon-return " style="color: #1E9FFF;"></i>
+                返回</a>
+        </div>
+        <div class="layui-col-xs6">
+            <img class="layui-upload-img" id="demo1"
+                 style="width: 30px;height: 30px;border-radius: 5px;margin-left: 10px;">
+            {{.client.Name}}</div>
+        <div class="layui-col-xs3">详情</div>
+    </div>
+</div>
+<div class="layui-row" id="content" style="height: 400px;overflow: auto">
+</div>
+
+{{/*    发送框*/}}
+<div class="layui-row " style="box-shadow: 0px -3px 9px 0px rgba(0,0,0,0.1);">
+    <div class="layui-col-xs12 layui-col-md12">
+        <div class="layui-col-xs8">
+            <textarea name="" id="input" required lay-verify="required" placeholder="请输入" class="layui-textarea"
+                      style="height: 10px"></textarea>
+        </div>
+        <div class="layui-col-xs4">
+            <button type="button" class="layui-btn" onclick="f()">发送</button>
+            <script>
+                function f() {
+                    var text = document.getElementById("input").value.toString()
+                    if (text === "") {
+                        return
+                    }
+                    // 发送到socket
+                    var obj = {
+                        "name":{{.client.Name}},
+                        "context": text,
+                        "type": "1",
+                    }
+                    var userimage
+                    userimage = "{{.user.HeadPortrait}}"
+                    send(obj)
+                    $("#content").append('<div class="layui-row" >' +
+                        '<div class="layui-col-md12"> ' +
+                        '<img class="layui-upload-img layui-col-md3" src=' + userimage + ' style="width: 35px;height: 35px;border-radius: 5px;margin-left: 10px;margin-top:2px;float: right;" >' +
+                        '<div class="layui-panel layui-bg-green layui-col-md9" style="float: right;width: auto">' +
+                        '<div style="padding: 10px;">' + text + '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        ' </div>'
+                    )
+                    document.getElementById("input").value = ""
+                    document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<p></p>
+<script>
+    var clientImageBase64
+    clientImageBase64 = "{{.client.HeadPortrait}}"
+    $('#demo1').attr('src', clientImageBase64);
+    ws = new WebSocket("ws://localhost:8080/socket/socket?sender=" + "{{.user.Name}}" + "&identity=" + "{{.user.Identity}}" + "&recipient=" + "{{.client.Name}}")
+    ws.onerror = function () {
+        console.log("连接错误！")
+        return
+    }
+    ws.onopen = function () {
+        console.log("连接成功")
+    }
+    window.onbeforeunload = function () {
+        ws.close()
+    }
+    ws.onmessage = function (data) {
+        var D = JSON.parse(data.data)
+        console.log(D)
+        switch (D.type) {
+            case "1": {
+                $("#content").append('<div class="layui-row" style="margin: 10px">' +
+                    '<img class="layui-upload-img" src=' + clientImageBase64 + ' style="width: 35px;height: 35px;border-radius: 5px;margin-right: 10px;margin-top:2px;float: left;" >' +
+                    '<div class="layui-panel" style="float: left;width: auto">' +
+                    '<div style="padding: 10px;">' +
+                    D.context +
+                    '</div>' +
+                    '</div>' +
+                    ' </div>')
+            }
+            case "2": {
+                console.log("图片")
+            }
+        }
+
+
+    }
+
+    function send(obj) {
+        ws.send(JSON.stringify(obj))
+    }
+</script>
+
+{{template "end.html"}}

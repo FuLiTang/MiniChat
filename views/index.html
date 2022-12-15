@@ -1,0 +1,73 @@
+{{template "head.html"}}
+<div class="layui-row">
+    <div style="margin-top: 300px" class="layui-col-xs12 layui-col-md12">
+        <form class="layui-form " action="" method="post">
+            <div class="layui-form-item ">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="用户名"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="password" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
+                           placeholder="密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item ">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">登录</button>
+                </div>
+            </div>
+
+        </form>
+        <script>
+            layui.use(['form', 'layedit', 'laydate'], function () {
+                var form = layui.form
+                    , layer = layui.layer
+                    , layedit = layui.layedit
+
+                //自定义验证规则
+                form.verify({
+                    title: function (value) {
+                        if (value.length < 5) {
+                            return '标题至少得5个字符啊';
+                        }
+                    }
+                    , pass: [
+                        /^[\S]{6,12}$/
+                        , '密码必须6到12位，且不能出现空格'
+                    ]
+                    , content: function (value) {
+                        layedit.sync(editIndex);
+                    }
+                });
+                //监听提交
+                form.on('submit(demo1)', function (data) {
+                    $.ajax(
+                        {
+                            url: "/user/query",
+                            type: "post",
+                            data: data.field,
+                            dataType: "json",
+                            success: function (aa) {
+                                if (aa.code === "1") {
+                                    document.location.href = "/web/home?name=" + aa.data.name + "&identity=" + aa.data.identity
+                                } else {
+                                    layer.alert(aa.message)
+                                }
+                            }
+                        }
+                    )
+                    return false;
+                });
+
+
+            });
+        </script>
+    </div>
+</div>
+{{template "end.html"}}
