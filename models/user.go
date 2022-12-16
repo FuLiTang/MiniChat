@@ -51,8 +51,7 @@ func (u *UserBasic) FirstNameAndPassword() *UserBasic {
 	return user
 }
 func (u *UserBasic) QueryAndIdentity() bool {
-	user := &UserBasic{}
-	if utils.MDb.Where("name = ? and identity = ?", u.Name, u.Identity).First(user).RowsAffected > 0 {
+	if utils.MDb.Where("name = ? and identity = ?", u.Name, u.Identity).First(u).RowsAffected > 0 {
 		return true
 	}
 	return false
@@ -89,7 +88,7 @@ func DeleteUser(user *UserBasic) *gorm.DB {
 	return db
 }
 
-// UpdateUser 第一个选择id，第二个选择更新的字段
+// UpdateUser 第一个选择id，第二个选择更新的字段 覆盖式更新字段
 func UpdateUser(user *UserBasic, i interface{}) *gorm.DB {
 	tx := utils.MDb.Begin()
 	db := tx.Model(&user).Updates(i)

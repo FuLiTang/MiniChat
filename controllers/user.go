@@ -42,7 +42,6 @@ func RegisterNameAndPassword(c *gin.Context) {
 		return
 	}
 	user.Password = ""
-	fmt.Println(user)
 	s := &models.State{UserName: user.Name, StateId: user.Identity}
 	s.Create()
 	c.JSON(200, gin.H{

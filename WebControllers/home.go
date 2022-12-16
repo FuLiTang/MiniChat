@@ -32,7 +32,6 @@ func MiniChat(c *gin.Context) {
 		})
 		return
 	}
-
 	c.HTML(http.StatusOK, "miniChat.html", gin.H{
 		"user":   user.FirstName(),
 		"client": client.FirstName(),

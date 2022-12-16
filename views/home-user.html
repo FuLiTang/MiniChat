@@ -87,7 +87,7 @@
             <div class="layui-row">
                 <div class="layui-col-md12">
                     <div class="layui-panel">
-                        <div style="padding: 20px 30px;">搜索好友</div>
+                        <div style="padding: 20px 30px;" onclick="seek({{.user.Name}})">搜索好友</div>
                     </div>
                 </div>
             </div>
@@ -112,8 +112,43 @@
                     </div>
                 </div>
             </div>
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-panel">
+                        <div style="padding: 30px 30px;" onclick="onlogin()">退出登录</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 </div>
+    <script>
+        function seek(data) {
+            layer.prompt({title: '输入任何口令，并确认', formType: 1}, function(pass, index){
+                layer.close(index);
+                layer.prompt({title: '随便写点啥，并确认', formType: 2}, function(text, index){
+                    layer.close(index);
+                    layer.msg('演示完毕！您的口令：'+ pass +'<br>您最后写下了：'+text);
+                });
+            });
+        }
+        function onlogin() {
+            layer.confirm('确定退出登录吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.ajax({
+                    url:'/userData/offLogin?name=' + '{{.user.Name}}' + '&identity=' + '{{.user.Identity}}',
+                    type:'POST',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.data==="已退出"){
+                            layer.msg('已退出登录', {icon: 1,time:1000});
+                            document.location.href = "/web/index"
+                        }
+                    }
+                })
+            }, );
+        }
+    </script>
 {{template "end.html"}}

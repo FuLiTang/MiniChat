@@ -105,7 +105,7 @@ func (p *pod) accept() {
 		case ms := <-p.AcceptContent:
 			err := p.ws.WriteJSON(ms)
 			if err != nil {
-				log.Println(err)
+				p.ws.Close()
 				return
 			}
 			log.Println("处理成功:", ms)
@@ -157,6 +157,7 @@ func (p *pod) redisAcceptAll() {
 			Name:    name,
 			Context: ms.Payload[len(t)+1:],
 			Time:    ms.Payload[0:len(t)],
+			Type:    "1", //临时，后期用户自动变量
 		}
 		p.onMessageCount = map[string]int{name: p.onMessageCount[name] + 1}
 		wg.Done()
@@ -176,10 +177,13 @@ func SocketAll(c *gin.Context) {
 	}
 
 	var p = pod{
+		SendContent:   make(chan *sendContent, 1024),
 		AcceptContent: make(chan *acceptContent, 1024),
 		ws:            ws,
 		user:          ms,
 	}
+	go p.send()
+	go p.redisSend()
 	go p.accept()
 	go p.redisAcceptAll()
 }

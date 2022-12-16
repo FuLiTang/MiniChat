@@ -19,11 +19,10 @@ type Relation struct {
 }
 
 func (t *Relation) Query() bool {
-	r := &Relation{}
-	if utils.MDb.Where("A = ? AND B = ? ", t.A, t.B).First(r).RowsAffected > 0 {
+	if utils.MDb.Where("A = ? AND B = ? ", t.A, t.B).First(t).RowsAffected > 0 {
 		return true
 	}
-	if utils.MDb.Where("B = ? AND A = ? ", t.A, t.B).First(r).RowsAffected > 0 {
+	if utils.MDb.Where("B = ? AND A = ? ", t.A, t.B).First(t).RowsAffected > 0 {
 		return true
 	}
 	return false

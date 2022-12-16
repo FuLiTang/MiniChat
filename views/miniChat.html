@@ -62,7 +62,29 @@
     var clientImageBase64
     clientImageBase64 = "{{.client.HeadPortrait}}"
     $('#demo1').attr('src', clientImageBase64);
-    ws = new WebSocket("ws://localhost:8080/socket/socket?sender=" + "{{.user.Name}}" + "&identity=" + "{{.user.Identity}}" + "&recipient=" + "{{.client.Name}}")
+    //接收临时存储的消息
+    var sessl = JSON.parse(sessionStorage.getItem({{.client.Name}}))
+    if (sessl!==null){
+        for (var i=0;i<sessl.length;i++){
+            var mData ={
+                type:sessl[i].type,
+                context:sessl[i].context,
+                time:sessl[i].time,
+            }
+
+            $("#content").append('<div class="layui-row" style="margin: 10px">' +
+                '<img class="layui-upload-img" src=' + clientImageBase64 + ' style="width: 35px;height: 35px;border-radius: 5px;margin-right: 10px;margin-top:2px;float: left;" >' +
+                '<div class="layui-panel" style="float: left;width: auto">' +
+                '<div style="padding: 10px;">' +
+                mData.context +
+                '</div>' +
+                '</div>' +
+                ' </div>')
+        }
+        sessionStorage.removeItem({{.client.Name}})
+    }
+    
+    ws = new WebSocket("ws://localhost:8080/socket/socketall?sender=" + "{{.user.Name}}" + "&identity=" + "{{.user.Identity}}")
     ws.onerror = function () {
         console.log("连接错误！")
         return
@@ -74,21 +96,40 @@
         ws.close()
     }
     ws.onmessage = function (data) {
-        var D = JSON.parse(data.data)
-        console.log(D)
-        switch (D.type) {
+        var c = JSON.parse(data.data)
+        if (c.name!=={{.client.Name}}){
+            var mesData = {
+                type:c.type,
+                context:c.context,
+                time:c.time,
+            }
+            var sessionMes = sessionStorage.getItem(c.name)
+            if (sessionMes===null){
+                var userMesData = [mesData]
+                sessionStorage.setItem(c.name,JSON.stringify(userMesData))
+            }else {
+                var ll = JSON.parse(sessionMes)
+                ll.push(mesData)
+                sessionStorage.setItem(c.name,JSON.stringify(ll))
+
+            }
+            return;
+        }
+        switch (c.type) {
             case "1": {
                 $("#content").append('<div class="layui-row" style="margin: 10px">' +
                     '<img class="layui-upload-img" src=' + clientImageBase64 + ' style="width: 35px;height: 35px;border-radius: 5px;margin-right: 10px;margin-top:2px;float: left;" >' +
                     '<div class="layui-panel" style="float: left;width: auto">' +
                     '<div style="padding: 10px;">' +
-                    D.context +
+                    c.context +
                     '</div>' +
                     '</div>' +
                     ' </div>')
+                return;
             }
             case "2": {
                 console.log("图片")
+                return;
             }
         }
 

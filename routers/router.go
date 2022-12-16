@@ -9,15 +9,16 @@ import (
 func Router() *gin.Engine {
 	r := gin.Default()
 	uC := r.Group("/user")
-	{
-		uC.POST("/create", controllers.CreateUser)
-		uC.POST("/delete", controllers.DeleteUser)
-		uC.POST("/update", controllers.UpdateUser)
-		uC.POST("/query", controllers.RegisterNameAndPassword)
-	}
+	//userCURD
+	uC.POST("/create", controllers.CreateUser)
+	uC.POST("/delete", controllers.DeleteUser)
+	uC.POST("/update", controllers.UpdateUser)
+	uC.POST("/query", controllers.RegisterNameAndPassword)
 	u := r.Group("/userData")
 	{
 		u.POST("/headPortrait", controllers.UserDataImage)
+		u.POST("/addFriends", controllers.AddFriends)
+		u.POST("/offLogin", controllers.Off)
 	}
 	chat := r.Group("/chat")
 	{
