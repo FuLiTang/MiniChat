@@ -1,0 +1,178 @@
+{{template "pcHead.html"}}
+
+  <div class="layui-col-md4" style="height: 500px;padding: 0;margin: 0">
+{{/*    <div class="layui-row">*/}}
+{{/*      <div class="phone">*/}}
+{{/*        <div class="content show" id="mes">*/}}
+{{/*          <div class="layui-row" id="show" onclick="f(321)">*/}}
+{{/*            <div style="width: 100%;height: 50px;" class="layui-row">*/}}
+{{/*              <div style="height: 98%;width:100%;padding: 5px" class="layui-col-md12">*/}}
+{{/*                <div class="layui-col-md3" style="padding-left: 10px">*/}}
+{{/*                  <img src="/static/logo.png" style="width: 40px;border-radius: 20px;">*/}}
+{{/*                </div>*/}}
+{{/*                <div class="layui-col-md9">*/}}
+{{/*                  <div class="layui-row">*/}}
+{{/*                    <strong style="width: auto;font-weight: bold;">John Doe</strong>*/}}
+{{/*                    <small id="date" style="color: #aaa;float: right;font-size: smaller;">21:00</small>*/}}
+{{/*                  </div>*/}}
+{{/*                 <div class="layui-row" style="margin: 5px 0 0 0;overflow: hidden" >*/}}
+{{/*                   <div class="layui-col-md12">*/}}
+{{/*                     <small id="date" class="layui-col-md10" style="padding-right:10px;color: #aaa;font-size: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">新闻联播赛事新闻联播赛事新闻联播赛事新闻联播赛事新闻联播赛事新闻联播赛事新闻联播赛事</small>*/}}
+{{/*                     <span class="layui-badge layui-bg-cyan layui-col-md2">99+</span>*/}}
+{{/*                   </div>*/}}
+
+{{/*                 </div>*/}}
+{{/*                </div>*/}}
+{{/*              </div>*/}}
+{{/*            </div>*/}}
+{{/*            <fieldset class="layui-elem-field layui-field-title layui-row" style="margin: 0 10px 0 60px;">*/}}
+{{/*            </fieldset>*/}}
+{{/*          </div>*/}}
+{{/*          <div class="layui-row">*/}}
+{{/*            <div style="width: 100%;height: 50px;">*/}}
+{{/*              <div style="height: 98%;width:100%;padding: 5px">*/}}
+{{/*                <img src="/static/logo.png" style="height: 40px;width: 40px;border-radius: 20px;margin: 0 10px 0 10px">*/}}
+
+{{/*              </div>*/}}
+{{/*            </div>*/}}
+{{/*            <fieldset class="layui-elem-field layui-field-title" style="margin: 0 10px 0 60px;">*/}}
+{{/*            </fieldset>*/}}
+{{/*          </div>*/}}
+{{/*          <div class="layui-row">*/}}
+{{/*            <div style="width: 100%;height: 50px;">*/}}
+{{/*              <div style="height: 98%;width:100%;padding: 5px">*/}}
+{{/*                <img src="/static/logo.png" style="height: 40px;width: 40px;border-radius: 20px;margin: 0 10px 0 10px">*/}}
+
+{{/*              </div>*/}}
+{{/*            </div>*/}}
+{{/*            <fieldset class="layui-elem-field layui-field-title" style="margin: 0 10px 0 60px;">*/}}
+{{/*            </fieldset>*/}}
+{{/*          </div>*/}}
+{{/*          <div class="layui-row" id="show" onclick="f(321)">*/}}
+{{/*            <div style="width: 100%;height: 50px;">*/}}
+{{/*              <div style="height: 98%;width:100%;padding: 5px">*/}}
+{{/*                <img src="/static/logo.png" style="height: 40px;width: 40px;border-radius: 20px;margin: 0 10px 0 10px">*/}}
+
+{{/*              </div>*/}}
+{{/*            </div>*/}}
+{{/*            <fieldset class="layui-elem-field layui-field-title" style="margin: 0 10px 0 60px;">*/}}
+{{/*            </fieldset>*/}}
+{{/*          </div>*/}}
+{{/*          <div class="layui-row" id="show" onclick="f(123)">*/}}
+{{/*            <div style="width: 100%;height: 50px;">*/}}
+{{/*              <div style="height: 98%;width:100%;padding: 5px">*/}}
+{{/*                <img src="/static/logo.png" style="height: 40px;width: 40px;border-radius: 20px;margin: 0 10px 0 10px">*/}}
+{{/*              </div>*/}}
+{{/*            </div>*/}}
+{{/*            <fieldset class="layui-elem-field layui-field-title" style="margin: 0 10px 0 60px;">*/}}
+{{/*            </fieldset>*/}}
+{{/*          </div>*/}}
+{{/*        </div>*/}}
+{{/*        <div  class="content">11</div>*/}}
+{{/*        <div  class="content">22</div>*/}}
+{{/*      <nav>*/}}
+{{/*        <ul>*/}}
+{{/*          <li class="active">*/}}
+{{/*            <i class="layui-icon layui-icon-notice"></i>*/}}
+{{/*            <p>消息</p>*/}}
+{{/*          </li>*/}}
+{{/*          <li>*/}}
+{{/*            <i class="layui-icon layui-icon-username"></i>*/}}
+{{/*            <p>联系人</p>*/}}
+{{/*          </li>*/}}
+{{/*          <li>*/}}
+{{/*            <i class="layui-icon layui-icon-senior"></i>*/}}
+{{/*            <p>我的</p>*/}}
+{{/*          </li>*/}}
+{{/*        </ul>*/}}
+{{/*      </nav>*/}}
+{{/*      </div>*/}}
+{{/*    </div>*/}}
+    <div class="layui-row"  >
+      <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin: 0">
+        <div class="layui-tab-content" style="height: 460px;padding: 0" >
+          <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
+          <div class="layui-tab-item">内容2</div>
+          <div class="layui-tab-item">内容3</div>
+        </div>
+        <ul class="layui-tab-title" style="border: none;text-align: center;padding: 0">
+          <li class="layui-this" style="padding: 0 5px 0 5px ;border: none;"><i class="layui-icon layui-icon-notice"></i></li>
+          <li style="padding: 0 5px 0 5px;border-bottom: none"><i class="layui-icon layui-icon-username"></i></li>
+          <li style="padding: 0 5px 0 5px;border: none"><i class="layui-icon layui-icon-senior"></i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<script src="/static/utils/mobile-tab-navigation/script.js"></script>
+  <div class="layui-col-md8">
+    <div class="layui-row" id="showMini" >
+      <div class="layui-row" style="height: 50px;">
+        <div class="layui-col-md12">
+          <div class="layui-col-md4">
+            <img src="/static/logo.png" style="height: 40px;width: 40px;">
+          </div>
+          <div class="layui-col-md8">王小曼</div>
+        </div>
+        <div class="layui-row"><hr></div>
+      </div>
+      <div class="layui-row" style="height:350px">
+        <div class="layui-row" style="padding: 10px 0 10px 0">
+          <div class="layui-col-md12">
+            <div class="layui-col-md11">
+              <div class="layui-panel layui-bg-green" style="word-break:break-all;margin: 0 10px 0 60px;padding: 5px;width: auto;float: right;border-radius: 5px">
+                <p>哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽</p>
+              </div>
+            </div>
+            <div class="layui-col-md1">
+              <img src="/static/logo.png" style="width: 35px;height: 35px;border-radius: 5px;">
+            </div>
+          </div>
+        </div>
+        <div class="layui-row" style="padding: 10px 0 10px 0">
+          <div class="layui-col-md12">
+            <div class="layui-col-md1">
+              <img src="/static/logo.png" style="width: 35px;height: 35px;border-radius: 5px;">
+            </div>
+            <div class="layui-col-md11">
+              <div class="layui-panel " style="word-break:break-all;margin: 0 60px 0 10px;padding: 5px;width: auto;float: left;border-radius: 5px">
+                <p>哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽哈喽</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layui-row" style="height:100px;">
+      <div class="layui-row"><hr>
+      </div>
+      <div class="layui-row">选择框</div>
+      <div class="layui-row" style="height: 100%">
+        <div class="layui-col-md12">
+          <div class="layui-col-md10" >
+            <textarea name="" id="input"  class="layui-textarea" style="width: 100%;border: none" overflow="auto">
+            </textarea>
+          </div>
+          <div class="layui-col-md2">
+            <button type="button" class="layui-btn layui-btn-fluid" style="height: 100%">发送</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  $(document).ready(function(){
+    $("#show").click(function(){
+
+    });
+  });
+
+function f(lr) {
+  $("#showMini").html(
+          "<b>Hello world!::" +
+          lr+
+          "</b>"
+  );
+}
+</script>
+{{template "pcEnd.html"}}

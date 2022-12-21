@@ -39,8 +39,14 @@ func Router() *gin.Engine {
 		socket.GET("/socketall", controllers.SocketAll)
 		socket.GET("/miniChatCount")
 	}
+	pc := r.Group("/pc")
+	{
+		pc.GET("/index", WebControllers.PcIndex)
+		pc.GET("/home", WebControllers.PcHome)
+	}
 	r.GET("/text", WebControllers.TextHome)
-	r.LoadHTMLGlob("views/*")     //目录加载
+	r.LoadHTMLGlob("views/**/*") //目录加载
+
 	r.Static("/static", "static") //静态文件夹
 	return r
 }
